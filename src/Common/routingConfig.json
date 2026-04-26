@@ -1,0 +1,34 @@
+{
+    "headComponents": [
+        {
+            "name": "Login",
+            "path": "/Login",
+            "component":"Login/Login",
+            "id": 0
+        },
+        {
+            "name": "SignUp",
+            "path": "/",
+            "component":"Login/SignUp",
+            "id": 1
+        },
+        {
+            "name": "Dashboard",
+            "path": "/Dashboard",
+            "component":"Dashboard/Dashboard",
+            "id": 2
+        },
+        {
+            "name": "Group",
+            "path": "/Group",
+            "component":"Group/Group",
+            "id": 3
+        },
+        {
+            "name": "Session",
+            "path": "/failure",
+            "component":"Session/Session",
+            "id": 4
+        }
+    ]
+}
