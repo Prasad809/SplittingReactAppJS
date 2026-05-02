@@ -18,7 +18,7 @@ const modalStyle = {
     transform: 'translate(-50%, -50%)',
     width: "50%",
     borderRadius: 5,
-    height: "50%",
+    height: "40%",
     boaderRadius: "25px",
     padding: "10px"
 };
@@ -75,7 +75,9 @@ function Group() {
     const usersList = () => {
         dispatch(userListAction()).then((res) => {
             if (res?.payload?.data?.status) {
-                setUsers(res?.payload?.data?.users || []);
+                const response = res?.payload?.data?.users;
+                const filtered = response?.filter(user =>user.id !== userRefNum);
+                setUsers(filtered || []);
             }
         });
     };
@@ -233,6 +235,7 @@ function Group() {
                                                 onBlur={handleBlur}
                                                 error={touched.groupName && Boolean(errors.groupName)}
                                                 helperText={touched.groupName && errors.groupName}
+                                                disabled={true}
                                             />
                                         </FormControl>
                                     </Grid>
