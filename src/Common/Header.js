@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { Tooltip } from "@mui/material";
 import "./common.css";
+import token from "./token";
 
 function Header() {
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -21,6 +24,13 @@ function Header() {
         };
     }, []);
 
+    const logOut=()=>{
+        navigate("/Login");
+        token.setTokens(null);
+        token.setExpryTm(null);
+        setOpen(false);
+    }
+
     return (
         <Navbar expand="lg" className="custom-navbar">
             <Container className="header">
@@ -28,15 +38,15 @@ function Header() {
                 {/* LEFT ICONS */}
                 <div className="nav-left">
                     <Tooltip title="Home">
-                        <span className="material-symbols-outlined nav-icon">home</span>
+                        <span className="material-symbols-outlined nav-icon" onClick={()=>navigate("/Dashboard")}>home</span>
                     </Tooltip>
 
                     <Tooltip title="Groups">
-                        <span className="material-symbols-outlined nav-icon">group</span>
+                        <span className="material-symbols-outlined nav-icon" onClick={()=>navigate("/Group")}>group</span>
                     </Tooltip>
 
-                    <Tooltip title="Wallet">
-                        <span className="material-symbols-outlined nav-icon">account_balance_wallet</span>
+                    <Tooltip title="Users Transactions">
+                        <span className="material-symbols-outlined nav-icon" onClick={()=>navigate("/UserSummary")}>account_balance_wallet</span>
                     </Tooltip>
                 </div>
 
@@ -59,7 +69,7 @@ function Header() {
                             <div className="menu-item" onClick={() => setOpen(false)}>
                                 🎨 Color Theme
                             </div>
-                            <div className="menu-item logout" onClick={() => setOpen(false)}>
+                            <div className="menu-item logout" onClick={() => logOut()}>
                                 🚪 Logout
                             </div>
                         </div>

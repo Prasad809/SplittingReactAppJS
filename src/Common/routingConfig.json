@@ -29,6 +29,12 @@
             "path": "/failure",
             "component":"Session/Session",
             "id": 4
+        },
+        {
+            "name": "UserProfile",
+            "path": "/UserSummary",
+            "component":"UserProfile/UserProfile",
+            "id": 5
         }
     ]
 }

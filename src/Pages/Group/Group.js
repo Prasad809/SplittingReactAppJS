@@ -22,6 +22,17 @@ const modalStyle = {
     boaderRadius: "25px",
     padding: "10px"
 };
+const modalStyle2 = {
+    position: 'absolute',
+    top: '40%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: "50%",
+    borderRadius: 5,
+    height: "auto",
+    boaderRadius: "25px",
+    padding: "10px"
+};
 
 const initialValues = {
     groupName: "",
@@ -82,21 +93,29 @@ function Group() {
         });
     };
     const [openList,setOpenList] = useState(false);
-    const handleOpenListPopUp = (group) => {        
-        setInitialVals({
-            groupName:group.groupName,
-            memberName:""
-        });
-        setSelectedGroup(group);
-        setOpenList(true);
-        dispatch(memberListAction({"groupId":group.groupId})).then(res =>{
-            console.log(res);
-            
-        })
+    const [viewMembers,setViewMembers] = useState([]);
+    const [viewPopUp,setViewPopUp] = useState(false);
+    const handleOpenListPopUp = (group,info) => {   
+        if(info == "add"){
+            setInitialVals({
+                groupName:group.groupName,
+                memberName:""
+            });
+            setSelectedGroup(group);
+            setOpenList(true);
+        }else{
+            dispatch(memberListAction({"groupId":group.groupId})).then(res =>{
+                if(res?.payload?.data?.status){
+                    setViewMembers(res?.payload?.data?.members)
+                };
+            });
+            setViewPopUp(true);
+        }     
     };
     const handleCloseListPopUp = () => {
         setOpenList(false);
         setSelectedGroup({});
+        setViewPopUp(false);
     };
 
     useEffect(() => {
@@ -138,12 +157,20 @@ function Group() {
         })
     };
 
+    const formatJoinedAt = (date) => {
+        const d = new Date(date);
+
+        return `Joined since ${d.toLocaleString('default', {
+            month: 'long',
+            year: 'numeric'
+        })}`;
+    };
 
     return (
         <Paper elevation={0}>
             <h2>Groups</h2>
             <h3>Create a Group
-            <span class="material-symbols-outlined pointer" onClick={handleOpenPopUp}><Tooltip title={"Create Group"}>person</Tooltip></span>
+            <span class="material-symbols-outlined pointer" onClick={handleOpenPopUp}><Tooltip title={"Create Group"}>group_add</Tooltip></span>
             </h3>
             <Grid container spacing={2}>
                 {groups?.map((group) => (
@@ -151,13 +178,14 @@ function Group() {
                         <div className="group-card">
                             <div>
                                 <h3 className="startEnd">Group Number : {group.groupId}
-                                    <span className="material-symbols-outlined pointer" onClick={()=>handleOpenListPopUp(group)}><Tooltip title={"Add Member"}>add</Tooltip></span>
+                                    <span className="material-symbols-outlined pointer" onClick={()=>handleOpenListPopUp(group,"view")}><Tooltip title={"View Group Members"}>family_group</Tooltip></span>
+                                    <span className="material-symbols-outlined pointer" onClick={()=>handleOpenListPopUp(group,"add")}><Tooltip title={"Add Member"}>person_add</Tooltip></span>
+                                    <span className="material-symbols-outlined pointer" onClick={()=>handleOpenListPopUp(group)}><Tooltip title={"Group Transctions"}>receipt</Tooltip></span>
                                 </h3>
                                 <h3>Group Name : {group.groupName}</h3>
                                 <p className="group-description">
                                     Group Description : {group?.description}
                                 </p>
-                                <p>Group Members : 10</p>
                             </div>
                         </div>
                     </Grid>
@@ -265,6 +293,23 @@ function Group() {
                                 </Grid>
                             </Form>)}
                     </Formik>
+                </InnerText>
+            </Modal>
+            <Modal open={viewPopUp} onClose={handleCloseListPopUp}>
+                <InnerText elevation={0} style={modalStyle2}>
+                    <AlertMsg errStatus={errAddStatus} errClose={errAddClose} severity={"error"}/>
+                    <h3 className="startEnd">
+                        Group Members
+                        <span className="material-symbols-outlined pointer" onClick={handleCloseListPopUp}>Close</span>
+                    </h3>
+                    {viewMembers?.map(user =>(
+                        <div>
+                            <p>Name : {user?.name}</p>
+                            <p>Phone : {user?.phone}</p>
+                            <p>Email : {user?.email}</p>
+                            <p>{formatJoinedAt(user?.joinedAt)}</p>
+                        </div>
+                    ))}
                 </InnerText>
             </Modal>
         </Paper>

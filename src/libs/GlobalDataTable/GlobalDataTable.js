@@ -1,5 +1,5 @@
 import DataTable from "react-data-table-component";
-import Loader from "./Loader";
+import Loader from "../Others/Loader";
 
 const customStyles = {
   headCells: {
