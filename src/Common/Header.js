@@ -1,21 +1,74 @@
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import { TextField, Tooltip } from "@mui/material"
+import { useEffect, useRef, useState } from "react";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import { Tooltip } from "@mui/material";
+import "./common.css";
 
 function Header() {
+    const [open, setOpen] = useState(false);
+    const menuRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     return (
-        <Container>
-            <Navbar expand="lg" className="bg-body-tertiary">
-                <Container className="header d-flex align-items-center">
-                    <Navbar.Brand><span class="material-symbols-outlined"><Tooltip title={"home"}>home</Tooltip></span></Navbar.Brand>
-                    <Navbar.Brand><span class="material-symbols-outlined"><Tooltip title={"groups"}>group</Tooltip></span></Navbar.Brand>
-                    <Navbar.Brand><span class="material-symbols-outlined"><Tooltip title={"wallets"}>wallet</Tooltip></span></Navbar.Brand>
-                    <Navbar.Collapse className='listEnd'>
-                        <span class="material-symbols-outlined">list</span>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-        </Container>
-    )
+        <Navbar expand="lg" className="custom-navbar">
+            <Container className="header">
+
+                {/* LEFT ICONS */}
+                <div className="nav-left">
+                    <Tooltip title="Home">
+                        <span className="material-symbols-outlined nav-icon">home</span>
+                    </Tooltip>
+
+                    <Tooltip title="Groups">
+                        <span className="material-symbols-outlined nav-icon">group</span>
+                    </Tooltip>
+
+                    <Tooltip title="Wallet">
+                        <span className="material-symbols-outlined nav-icon">account_balance_wallet</span>
+                    </Tooltip>
+                </div>
+
+                {/* RIGHT MENU */}
+                <div className="nav-right" ref={menuRef}>
+                    <Tooltip title="Menu">
+                        <span
+                            className="material-symbols-outlined menu-icon"
+                            onClick={() => setOpen(!open)}
+                        >
+                            list
+                        </span>
+                    </Tooltip>
+
+                    {open && (
+                        <div className="dropdown-menu">
+                            <div className="menu-item" onClick={() => setOpen(false)}>
+                                👤 Profile
+                            </div>
+                            <div className="menu-item" onClick={() => setOpen(false)}>
+                                🎨 Color Theme
+                            </div>
+                            <div className="menu-item logout" onClick={() => setOpen(false)}>
+                                🚪 Logout
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+            </Container>
+        </Navbar>
+    );
 }
+
 export default Header;

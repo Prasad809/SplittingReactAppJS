@@ -26,7 +26,7 @@ function Login({setNxt}){
         };
         dispatch(authAction(payload)).then(res =>{
             if(res?.payload?.data?.status){
-                navigate("/group");
+                navigate("/Dashboard");
                 setNxt("1");
             }else{
                 setErrStatus(res?.payload?.data?.message?.[0]?.description);

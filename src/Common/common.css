@@ -1,0 +1,93 @@
+.custom-navbar {
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 10px 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* LEFT ICONS */
+.nav-left {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-icon {
+    font-size: 26px;
+    cursor: pointer;
+    color: #444;
+    transition: all 0.2s ease;
+}
+
+.nav-icon:hover {
+    color: #1976d2;
+    transform: scale(1.1);
+}
+
+/* RIGHT MENU */
+.nav-right {
+    position: relative;
+}
+
+.menu-icon {
+    font-size: 28px;
+    cursor: pointer;
+    color: #444;
+    transition: 0.2s;
+}
+
+.menu-icon:hover {
+    color: #1976d2;
+}
+
+/* DROPDOWN */
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 45px;
+    width: 180px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    overflow: hidden;
+    animation: fadeIn 0.15s ease-in-out;
+    z-index: 999;
+}
+
+/* MENU ITEMS */
+.menu-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.menu-item:hover {
+    background: #f5f5f5;
+}
+
+/* logout highlight */
+.logout {
+    color: #d32f2f;
+    font-weight: 500;
+}
+
+.logout:hover {
+    background: #ffeaea;
+}
+
+/* animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
