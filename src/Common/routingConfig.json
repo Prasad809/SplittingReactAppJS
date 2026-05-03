@@ -35,6 +35,18 @@
             "path": "/UserSummary",
             "component":"UserProfile/UserProfile",
             "id": 5
+        },
+        {
+            "name": "Notification",
+            "path": "/Notification",
+            "component":"Notification/Notification",
+            "id": 6
+        },
+        {
+            "name": "GroupsDetails",
+            "path": "/GroupsDetails",
+            "component":"Group/GroupsDetails",
+            "id": 7
         }
     ]
 }

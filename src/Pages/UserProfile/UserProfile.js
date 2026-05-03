@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userSummaryAction } from "./Store/Action";
 import GlobalDataTable from "../../libs/GlobalDataTable/GlobalDataTable";
+import { Grid } from "@mui/material";
+import UserCard from "../Notification/UserCard";
 
 function UserProfile() {
     const dispatch = useDispatch();
@@ -25,9 +27,14 @@ function UserProfile() {
         })
     }, []);
     return (
-        <div>
-            <GlobalDataTable columns={columns} data={userSummary} />
-        </div>
+        <Grid container>
+            <Grid size={3}>
+                <UserCard user={authReducer.user}/>
+            </Grid>
+            <Grid size={9}>
+                <GlobalDataTable columns={columns} data={userSummary} />
+            </Grid>
+        </Grid>
     )
 }
 export default UserProfile;

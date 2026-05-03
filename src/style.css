@@ -76,17 +76,24 @@ body{
 }
 
 
+
 .group-card {
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  padding: 16px;
-  background: #fff;
-  box-sizing: border-box;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    border: 2px solid black;
+    padding: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
 }
+
+.group-card.selected {
+    border: 2px solid green;
+}
+
+.group-card.selected {
+    border: 2px solid #4caf50;
+    background-color: #f1f8e9;
+}
+
 
 .group-description {
   overflow: hidden;

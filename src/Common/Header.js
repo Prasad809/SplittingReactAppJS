@@ -48,6 +48,9 @@ function Header() {
                     <Tooltip title="Users Transactions">
                         <span className="material-symbols-outlined nav-icon" onClick={()=>navigate("/UserSummary")}>account_balance_wallet</span>
                     </Tooltip>
+                    <Tooltip title="Natification">
+                        <span className="material-symbols-outlined nav-icon" onClick={()=>navigate("/Notification")}>notifications</span>
+                    </Tooltip>
                 </div>
 
                 {/* RIGHT MENU */}
