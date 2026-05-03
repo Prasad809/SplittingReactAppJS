@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { notifyAction, readNotifyAction } from "./Store/Action";
+import { notifyAction, pendingNotifyAction, readNotifyAction } from "./Store/Action";
 import InnerText from "@mui/material/Paper";
 import { Grid,Modal } from "@mui/material"
 import GlobalDataTable from "../../libs/GlobalDataTable/GlobalDataTable";
 import UserCard from "./UserCard";
+import ButtonThemes from "../../libs/ButtonThemes/ButtonThemes";
 
 const modalStyle = {
     position: 'absolute',
@@ -84,6 +85,19 @@ function Notification() {
     useEffect(() => {
         handleNotifications();
     }, []);
+    const handleApprove=(groupId)=>{
+        const payload={
+            "groupId":groupId,
+            "userId":userRefNum
+        };
+        dispatch(pendingNotifyAction(payload)).then(res =>{
+            if(res?.payload?.data?.status){
+                setView(false);
+                setViewNotify({});
+            }
+            console.log(res)
+        })
+    }
     return (
         <Grid container>
             <Grid size={3}>
@@ -104,6 +118,11 @@ function Notification() {
                         <p>referenceId : {viewNotify?.referenceId}</p>
                         <p>Invited At : {formatJoinedAt(viewNotify?.createdAt)}</p>
                     </div>
+                   {viewNotify.isRead == "N" && <><div>
+                        <strong>Do you Want to Join this Group?</strong>
+                    </div>
+                    <ButtonThemes name={"YES"} clr={"contained"} funcname={()=>handleApprove(viewNotify?.groupId)}/>
+                    <ButtonThemes name={"No"} clr={"outlined"} funcname={handleClosePopUp}/></>}
                 </InnerText>
             </Modal>
         </Grid>

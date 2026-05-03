@@ -1,4 +1,4 @@
-import { Box, Button, Divider, FormControl, Grid, MenuItem, Modal, Paper, Tooltip } from "@mui/material";
+import { Box, Button, Card, CardContent, Divider, FormControl, Grid, MenuItem, Modal, Paper, Tooltip } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createGroupAction, groupListAction } from "./Store/Action";
@@ -99,15 +99,16 @@ function Group() {
             <h3>Create a Group
             <span class="material-symbols-outlined pointer" onClick={handleOpenPopUp}><Tooltip title={"Create Group"}>group_add</Tooltip></span>
             </h3>
+                <ButtonThemes name={"Next"} funcname={handleSubmitGroup} clr={disabled ? "outlined" :"contained"} disabled={disabled}/>
             <Grid container spacing={2}>
                 {groups?.map((group) => (
                     <Grid item xs={12} sm={6} md={4} key={group.groupId}>
-                        <div
+                        <Card
                             className={`group-card ${selectedGroupId === group.groupId ? "selected" : ""
                                 }`}
                             onClick={() => handleSelectGroup(group)}
                         >
-                            <div>
+                            <CardContent>
                                 <h3 className="startEnd">
                                     Group Number : {group.groupId}
                                 </h3>
@@ -115,13 +116,10 @@ function Group() {
                                 <p className="group-description">
                                     Group Description : {group?.description}
                                 </p>
-                            </div>
-                        </div>
+                            </CardContent>
+                        </Card>
                     </Grid>
                 ))}
-            </Grid>
-            <Grid>
-                <ButtonThemes name={"Next"} funcname={handleSubmitGroup} clr={disabled ? "outlined" :"contained"} disabled={disabled}/>
             </Grid>
             <Modal open={open} onClose={handleClosePopUp}>
                 <InnerText elevation={0} style={modalStyle}>

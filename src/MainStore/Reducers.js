@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import { authReducer, RegisterReducer } from "../Pages/Login/Store/Reducer";
-import { usersReducer, groupsReducer, createGroupReducer, addMemberReducer } from "../Pages/Group/Store/Reducer";
+import { usersReducer, groupsReducer, createGroupReducer, addMemberReducer, addExpenseReducer, transGroupReducer, settledBalReducer, apprveMemReducer, requestMemReducer } from "../Pages/Group/Store/Reducer";
 import { userSummaryReducer } from "../Pages/UserProfile/Store/Reducer";
-import { notifyReducer,readNotifyReducer } from "../Pages/Notification/Store/Reducer";
+import { notifyReducer,pendingReducer,readNotifyReducer } from "../Pages/Notification/Store/Reducer";
 
 const rootReducers = combineReducers({
     authReducer,
@@ -13,7 +13,13 @@ const rootReducers = combineReducers({
     addMemberReducer,
     userSummaryReducer,
     notifyReducer,
-    readNotifyReducer
+    readNotifyReducer,
+    addExpenseReducer,
+    transGroupReducer,
+    settledBalReducer,
+    apprveMemReducer,
+    requestMemReducer,
+    pendingReducer
 });
 
 export default rootReducers;

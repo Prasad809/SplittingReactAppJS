@@ -9,3 +9,6 @@ export const notify =(creds)=>{
 export const readNotify =(creds)=>{
   return axios.post('http://localhost:8082/group/readNotify',creds,{ headers });
 };
+export const penddingNotify =(creds)=>{
+  return axios.post('http://localhost:8082/group/pendding',creds,{ headers });
+};
