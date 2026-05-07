@@ -5,15 +5,16 @@ import { useDispatch } from "react-redux";
 import { RegisterAction } from "./Store/Action";
 import { initialValues, validation } from "./validationSchema";
 import "./SignUp.css";
+import Field from "../../libs/InputField/Field";
 
 // Simple icon components (swap with your icon lib if preferred)
-const Icon = ({ path }) => (
-  <svg className="field-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-    viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-    strokeLinecap="round" strokeLinejoin="round">
-    <path d={path} />
-  </svg>
-);
+// const Icon = ({ path }) => (
+//   <svg className="field-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+//     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+//     strokeLinecap="round" strokeLinejoin="round">
+//     <path d={path} />
+//   </svg>
+// );
 
 const ICONS = {
   user:  "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
@@ -22,26 +23,26 @@ const ICONS = {
   lock:  "M19 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zM7 11V7a5 5 0 0 1 10 0v4",
 };
 
-const Field = ({ label, name, type = "text", placeholder, icon, value, onChange, onBlur, error, helperText }) => (
-  <div className="field-wrap">
-    <label className="field-label" htmlFor={name}>{label}</label>
-    <div className="field-input-wrap">
-      <input
-        id={name}
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        className={`field-input${error ? " is-error" : ""}`}
-        autoComplete="off"
-      />
-      <Icon path={icon} />
-    </div>
-    {error && helperText && <span className="field-error">{helperText}</span>}
-  </div>
-);
+// const Field = ({ label, name, type = "text", placeholder, icon, value, onChange, onBlur, error, helperText }) => (
+//   <div className="field-wrap">
+//     <label className="field-label" htmlFor={name}>{label}</label>
+//     <div className="field-input-wrap">
+//       <input
+//         id={name}
+//         name={name}
+//         type={type}
+//         placeholder={placeholder}
+//         value={value}
+//         onChange={onChange}
+//         onBlur={onBlur}
+//         className={`field-input${error ? " is-error" : ""}`}
+//         autoComplete="off"
+//       />
+//       <Icon path={icon} />
+//     </div>
+//     {error && helperText && <span className="field-error">{helperText}</span>}
+//   </div>
+// );
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -81,7 +82,7 @@ const SignUp = () => {
         </div>
 
         {/* Feature bullets */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginBottom: "48px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginBottom: "70px" }}>
           {[
             { icon: "💸", label: "Instant expense splitting" },
             { icon: "📊", label: "Track balances in real time" },
